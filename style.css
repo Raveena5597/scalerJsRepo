@@ -38,7 +38,6 @@ body {
 .color:hover {
     border-style: double;
     border-color: azure;
-    transition: all .3s ease-in-out;
 }
 
 .lightpink {
@@ -79,11 +78,15 @@ body {
 
 .add-btn:hover {
     background-color: green;
-    transition: all .3s ease-in-out;
 }
 
 .del-btn:hover {
     background-color: red;
+}
+
+.color,
+.add-btn,
+.del-btn {
     transition: all .3s ease-in-out;
 }
 
@@ -157,4 +160,33 @@ body {
 .priority-color {
     height: 4rem;
     width: 6rem;
+}
+
+.modal-cont.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.modal-cont.visible {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease-in-out;
+    display: flex;
+    /* Ensure flex layout */
+}
+
+.priority-color.active {
+    border: 3px solid gold;
+    /* You can change the color and thickness of the border as desired */
+    border-radius: 20%;
+    /* : Add rounded corners */
+}
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: flex;
 }
