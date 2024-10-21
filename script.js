@@ -43,6 +43,7 @@ function createTicket(ticketColor, ticketTask, ticketID) {
     //Appending the added ticket container to the main container
     const mainCont = document.querySelector('.main-cont');
     mainCont.appendChild(ticket);
+    handleLock(ticket)
 }
 let modalPriorityColor = 'black';
 
@@ -98,6 +99,32 @@ function handleTicketRemoval(ticketElem) {
             ticketElem.remove();
         } else {
             console.log('in else statement')
+        }
+    })
+}
+
+
+//Locking mechanism
+const lockCloseClass = 'fa-lock';
+const lockOpenClass = 'fa-lock-open';
+
+function handleLock(ticketElem) {
+    const ticketLockElem = ticketElem.querySelector('.ticket-lock');
+    const ticketTaskArea = ticketElem.querySelector('.ticket-desc')
+    ticketLockElem.addEventListener('click', function () {
+        console.log('lock icon clicked');
+        if (ticketLockElem.children[0].classList.contains(lockCloseClass)) {
+            // 1. remove lock close class.
+            // 2. add lock open class.
+            // 3. now should be able to edit.
+            console.log('contains lock class');
+            ticketLockElem.children[0].classList.remove(lockCloseClass);
+            ticketLockElem.children[0].classList.add(lockOpenClass);
+            ticketTaskArea.setAttribute('contenteditable', "true"); // allowing html element to be edited.
+        } else {
+            ticketLockElem.children[0].classList.remove(lockOpenClass);
+            ticketLockElem.children[0].classList.add(lockCloseClass);
+            ticketTaskArea.setAttribute('contenteditable', "false");
         }
     })
 }
