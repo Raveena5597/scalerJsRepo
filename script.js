@@ -1,18 +1,12 @@
+//buttons
 const addBtn = document.querySelector('.add-btn');
+const delBtn = document.querySelector('.del-btn')
+
+//main container and text area container
 const modalCont = document.querySelector('.modal-cont');
 const textAreaCont = document.querySelector('.text-area-cont');
 //Show and hide the modal container
 let addFlag = false;
-// addBtn.addEventListener('click', () => {
-//     if (addFlag == false) {
-//         modalCont.style.display = "flex";
-//         addFlag = true;
-//     }
-//     else {
-//         modalCont.style.display = "none";
-//         addFlag = false;
-//     }
-// })
 addBtn.addEventListener('click', () => {
     if (!addFlag) {
         modalCont.classList.add('visible');
@@ -80,4 +74,31 @@ allPriorityColors.forEach(function (colorElement) {
         modalPriorityColor = colorElement.getAttribute('data-color');
     })
 })
+
+//delete button functinality
+let removeTaskFlag = false;
+delBtn.addEventListener('click', () => {
+    removeTaskFlag = !removeTaskFlag; // toggle the value.
+    const allTickets = document.querySelectorAll('.ticket-cont');
+    console.log(allTickets, 'allTickets');
+    for (let i = 0; i < allTickets.length; i++) {
+        handleTicketRemoval(allTickets[i])
+    }
+    if (removeTaskFlag) {
+        alert('Delete button has been activated.');
+        removeBtn.style.color = 'red';
+    } else {
+        removeBtn.style.color = 'white'
+    }
+})
+function handleTicketRemoval(ticketElem) {
+    console.log(ticketElem)
+    ticketElem.addEventListener('click', function () {
+        if (removeTaskFlag === true) {
+            ticketElem.remove();
+        } else {
+            console.log('in else statement')
+        }
+    })
+}
 
