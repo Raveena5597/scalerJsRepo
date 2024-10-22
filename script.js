@@ -44,6 +44,7 @@ function createTicket(ticketColor, ticketTask, ticketID) {
     const mainCont = document.querySelector('.main-cont');
     mainCont.appendChild(ticket);
     handleLock(ticket)
+    handleColorChange(ticket);
 }
 let modalPriorityColor = 'black';
 
@@ -129,3 +130,21 @@ function handleLock(ticketElem) {
     })
 }
 
+const COLORS = ['lightpink', 'lightgreen', 'lightblue', 'black'];
+
+function handleColorChange(ticketElem) {
+    const ticketColorBand = ticketElem.querySelector('.ticket-color');
+    ticketColorBand.addEventListener('click', function () {
+        const currentColor = ticketColorBand.style.backgroundColor;
+        // get index of that in your Colors array.
+        // findIndex method.
+        const currentColorIndex = COLORS.findIndex(function (color) {
+            return color === currentColor
+        })
+        console.log(COLORS, currentColor, currentColorIndex)
+        // increment index & using modulus operator to avoid OVERFLOW.
+        const newColorIndex = (currentColorIndex + 1) % COLORS.length;
+        const newTicketColor = COLORS[newColorIndex];
+        ticketColorBand.style.backgroundColor = newTicketColor;
+    })
+}
